@@ -1,16 +1,30 @@
+import React from 'react'
 import Link from 'next/link'
-import { Paper, Button, IconButton, Avatar } from '@material-ui/core'
+import { Paper, Button, IconButton, Avatar, Dialog, DialogContentText, Typography } from '@material-ui/core'
 import {
     SearchOutlined as SearchIcon,
     SmsOutlined as MessageIcon,
     Menu as MenuIcon,
     ExpandMoreOutlined as ArrowButton,
-    NotificationsNoneOutlined as NotificationIcon
+    NotificationsNoneOutlined as NotificationIcon,
+    AccountCircleOutlined as UserIcon
+
 } from '@material-ui/icons'
 
 import styles from './Header.module.scss'
+import { AuthDialog } from '../AuthDialog'
 
 export const Header: React.FC = () => {
+    const [authVisible, setSetAuthVisible] = React.useState(false)
+
+    const openAuthDialog = () => {
+        setSetAuthVisible(true)
+    }
+
+    const closeAuthDialog = () => {
+        setSetAuthVisible(false)
+    }
+
     return (
         <Paper className={{ root: styles.root }} elevation={0}>
             <div className="d-flex align-center">
@@ -36,13 +50,13 @@ export const Header: React.FC = () => {
                 </Link>
             </div>
             <div className="d-flex align-center">
-                <IconButton>
+                <IconButton >
                     <MessageIcon />
                 </IconButton>
                 <IconButton>
                     <NotificationIcon />
                 </IconButton>
-                <Link href="/profile/1">
+                {/* <Link href="/profile/1">
                     <a className="d-flex align-center">
                         <Avatar
                             className={styles.avatar}
@@ -50,8 +64,14 @@ export const Header: React.FC = () => {
                         />
                         <ArrowButton />
                     </a>
-                </Link>
+                </Link> */}
+                <div onClick={openAuthDialog} className={styles.loginButton}>
+                    <UserIcon />
+                    Войти
+                </div>
             </div>
+
+            <AuthDialog onClose={closeAuthDialog} visible={authVisible} />
         </Paper>
     )
 }

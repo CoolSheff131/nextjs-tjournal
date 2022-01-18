@@ -4,15 +4,10 @@ import { MainLayout } from '../layouts/MainLayout'
 
 
 
-export const Home = () => {
+export default function Messages() {
     return (
         <MainLayout>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+
         </MainLayout>
     )
 }
