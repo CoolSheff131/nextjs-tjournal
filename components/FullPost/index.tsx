@@ -9,7 +9,7 @@ import styles from './FullPost.module.scss'
 export const FullPost = () => {
     return (
         <Paper elevation={0} className={styles.paper}>
-            <div style={{ margin: '0 auto', width: 680 }}>
+            <div className='container'>
                 <Typography variant="h4" className={styles.title}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora qui ea quibusdam, perferendis non veritatis. Velit dignissimos reprehenderit maiores magnam id eligendi, soluta dolorem unde, quae sit totam dolores! Id!
                 </Typography>
