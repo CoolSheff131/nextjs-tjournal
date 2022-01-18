@@ -27,10 +27,13 @@ export const Header: React.FC = () => {
                     <SearchIcon />
                     <input placeholder="Поиск" />
                 </div>
-
-                <Button variant="outlined" className={styles.penButton}>
-                    Новая запись
-                </Button>
+                <Link href="/write">
+                    <a>
+                        <Button variant="outlined" className={styles.penButton}>
+                            Новая запись
+                        </Button>
+                    </a>
+                </Link>
             </div>
             <div className="d-flex align-center">
                 <IconButton>
