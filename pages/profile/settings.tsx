@@ -23,7 +23,7 @@ export const Settings = () => {
                         size="small"
                         label="Эл. почта"
                         variant="outlined"
-                        fullwidth
+                        fullwцidth
                         required
                     />
                     <TextField size="small" label="Пароль" variant="outlined" fillWidth required />
