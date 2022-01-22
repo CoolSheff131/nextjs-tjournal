@@ -8,12 +8,15 @@ import { CreateUserDto } from '../../../utils/api/types'
 import { LoginFormSchema, RegisterFormSchema } from '../../../utils/validations'
 import { FormField } from '../../FormField'
 import Alert from '@material-ui/lab/Alert'
+import { useAppDispatch } from '../../../redux/hooks'
+import { setUserData } from '../../../redux/slices/user'
 
 interface RegisterFormProps {
     onOpenLogin: () => void
 }
 
 export const Register: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
+    const dispatch = useAppDispatch()
     const [errorMessage, setErrorMessage] = React.useState('')
     const form = useForm({
         mode: 'onChange',
@@ -27,6 +30,7 @@ export const Register: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
                 path: '/',
             })
             setErrorMessage('')
+            dispatch(setUserData(data))
         } catch (error) {
             if (error.response) {
                 setErrorMessage(error.response.data.message)
