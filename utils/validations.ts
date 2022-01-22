@@ -5,5 +5,5 @@ export const LoginFormSchema = yup.object().shape({
     password: yup.string().min(6,'Коротко').required('Заполните это поле')
 })
 export const RegisterFormSchema = yup.object().shape({
-    fullname: yup.string().required('Заполните это поле'),
+    fullName: yup.string().required('Заполните это поле'),
 }).concat(LoginFormSchema)
