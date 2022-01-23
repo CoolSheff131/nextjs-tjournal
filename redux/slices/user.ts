@@ -4,7 +4,7 @@ import { ResponseUser } from "../../utils/api/types";
 import { RootState } from "../store";
 
 export interface UserState {
-    data: ResponseUser | null
+    data?: ResponseUser | null
 }
 
 const initialState: UserState = {
