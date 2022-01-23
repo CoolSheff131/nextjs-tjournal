@@ -14,11 +14,11 @@ import data from '../../data'
 //     }
 // }
 
-// interface PostCommentsProps {
-//     items: IComment[]
-// }
+interface PostCommentsProps {
+    postId: number;
+}
 
-export const PostComments: React.FC = () => {
+export const PostComments: React.FC<PostCommentsProps> = ({ postId }) => {
     const [activeTab, setActiveTab] = React.useState(0)
     const comments = data.comments[activeTab === 0 ? 'popular' : 'new']
     return (
@@ -32,7 +32,7 @@ export const PostComments: React.FC = () => {
                     <Tab label="По порядку" />
                 </Tabs>
                 <Divider />
-                <AddCommentForm />
+                <AddCommentForm postId={postId} />
                 <div className="mb-20" />
                 {
                     comments.map((obj) => <Comment key={obj.id} user={obj.user} text={obj.text} createdAt={obj.createdAt} />)

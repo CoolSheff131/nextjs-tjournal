@@ -16,7 +16,7 @@ const FullPostPage: NextPage<FullPostPageProps> = ({ post }) => {
     return (
         <MainLayout>
             <FullPost title={post.title} blocks={post.body} />
-            <PostComments />
+            <PostComments postId={post.id} />
         </MainLayout>
     )
 }
