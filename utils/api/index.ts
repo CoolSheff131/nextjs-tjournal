@@ -14,5 +14,12 @@ export const UserApi={
     async login(dto: LoginDto){
         const {data} =await instance.post<LoginDto, {data: ResponseUser}>('/auth/login',dto)
         return data
-    }
+    },
+
+    async getMe(token: string){
+        const {data} =await instance.get<ResponseUser>('/users/me',{headers:{
+            Authrization: `Bearer ${token}`
+        }})
+        return data
+    },
 }
