@@ -6,29 +6,27 @@ import UserAddIcon from '@material-ui/icons/PersonAddOutlined'
 
 import styles from './FullPost.module.scss'
 
-export const FullPost = () => {
+interface FullPostProps {
+    title: string;
+    blocks: OutputData['blocks']
+
+}
+
+export const FullPost: React.FC<FullPostProps> = ({ title, blocks }) => {
     return (
         <Paper elevation={0} className={styles.paper}>
             <div className='container'>
                 <Typography variant="h4" className={styles.title}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora qui ea quibusdam, perferendis non veritatis. Velit dignissimos reprehenderit maiores magnam id eligendi, soluta dolorem unde, quae sit totam dolores! Id!
+                    {title}
                 </Typography>
                 <div>
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio veritatis accusantium, impedit ratione ipsam dignissimos aperiam voluptate deserunt eos exercitationem eum placeat aut obcaecati, eaque asperiores libero nesciunt. Magni, provident.
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio veritatis accusantium, impedit ratione ipsam dignissimos aperiam voluptate deserunt eos exercitationem eum placeat aut obcaecati, eaque asperiores libero nesciunt. Magni, provident.
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio veritatis accusantium, impedit ratione ipsam dignissimos aperiam voluptate deserunt eos exercitationem eum placeat aut obcaecati, eaque asperiores libero nesciunt. Magni, provident.
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio veritatis accusantium, impedit ratione ipsam dignissimos aperiam voluptate deserunt eos exercitationem eum placeat aut obcaecati, eaque asperiores libero nesciunt. Magni, provident.
-                    </Typography>
-                    <Typography>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio veritatis accusantium, impedit ratione ipsam dignissimos aperiam voluptate deserunt eos exercitationem eum placeat aut obcaecati, eaque asperiores libero nesciunt. Magni, provident.
-                    </Typography>
+                    {
+                        blocks.map(obj =>
+                            <Typography key={obj.id} dangerouslySetInnerHTML={{ __html: obj.data.text }} />
+                        )
+                    }
+
+
                     <div style={{ width: 250, marginLeft: -14 }}>
                         <PostActions />
                     </div>
