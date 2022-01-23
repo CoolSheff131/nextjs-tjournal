@@ -15,10 +15,13 @@ import styles from './Header.module.scss'
 import { AuthDialog } from '../AuthDialog'
 import { useAppSelectore } from '../../redux/hooks'
 import { selectUserData } from '../../redux/slices/user'
+import { PostItem } from '../../utils/api/types'
 
 export const Header: React.FC = () => {
     const userData = useAppSelectore(selectUserData)
     const [authVisible, setSetAuthVisible] = React.useState(false)
+    const [searchValue, setSearchValue] = React.useState('')
+    const [posts, setPosts] = React.useState<PostItem[]>([])
 
     const openAuthDialog = () => {
         setSetAuthVisible(true)
@@ -34,6 +37,17 @@ export const Header: React.FC = () => {
         }
     }, [authVisible, userData])
 
+    const handleChangeInput = async e => {
+        setSearchValue(e.target.value)
+        try {
+            const { items } = await Api().post.search({ title: e.target.value })
+            setPosts(items)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
     return (
         <Paper className={{ root: styles.root }} elevation={0}>
             <div className="d-flex align-center">
@@ -48,7 +62,17 @@ export const Header: React.FC = () => {
 
                 <div className={styles.searchBlock}>
                     <SearchIcon />
-                    <input placeholder="Поиск" />
+                    <input value={searchValue} onChange={handleChangeInput} placeholder="Поиск" />
+                    {posts.length > 0 && <Paper className={styles.searchBlockPopup}>
+                        <List>
+                            {
+                                posts.map((obj) => <Link key={obj.id} href={`/news/${obj.id}`}><a>
+                                    <ListItem button >
+                                        {obj.title}
+                                    </ListItem></a></Link>)
+                            }
+                        </List>
+                    </Paper>}
                 </div>
                 <Link href="/write">
                     <a>
