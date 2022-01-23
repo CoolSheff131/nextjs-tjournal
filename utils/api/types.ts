@@ -1,3 +1,4 @@
+import { OutputData } from "@editorjs/editorjs"
 
 
 export type LoginDto = {
@@ -16,5 +17,16 @@ export type ResponseUser = {
     fullName: string;
     id: number;
     token: string;
+    updatedAt: string;
+}
+
+export type PostItem = {
+    title: string;
+    body: OutputData['blocks'];
+    tags: null | string;
+    id: number;
+    views: number;
+    description: string;
+    createdAt: string;
     updatedAt: string;
 }

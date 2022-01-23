@@ -13,7 +13,8 @@ import { AppProps } from 'next/dist/shared/lib/router/router'
 import Head from 'next/head'
 import { parseCookies } from 'nookies'
 import { setUserData } from '../redux/slices/user'
-import { UserApi } from '../utils/api'
+import { UserApi } from '../utils/api/user'
+import { Api } from '../utils/api'
 
 const App = ({ Component, pageProps }: AppProps) => {
     return (
@@ -38,10 +39,15 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx, Component }) => {
     try {
-        const { authToken } = parseCookies(ctx)
-        const userData = await UserApi.getMe(authToken)
+        const userData = await Api(ctx).user.getMe()
         store.dispatch(setUserData(userData))
     } catch (error) {
+        if (ctx.asPath === '/write') {
+            ctx.res.writeHead(302, {
+                Location: '/403'
+            })
+            ctx.res.end()
+        }
         console.log(error);
     }
     return {

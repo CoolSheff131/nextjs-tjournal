@@ -5,23 +5,31 @@ import Image from 'next/image'
 import styles from './Post.module.scss'
 import { PostActions } from '../PostActions'
 
-export const Post: React.FC = () => {
+interface PostProps {
+    title: string;
+    description: string;
+    imageUrl?: string;
+    id: number;
+}
+
+export const Post: React.FC<PostProps> = ({ id, title, description, imageUrl }) => {
     return (
         <Paper elevation={0} className="p-20" classes={{ root: styles.paper }}>
             <Typography variant="h5" className={styles.tite}>
-                <Link>
+                <Link href={`/news/${id}`}>
                     <a>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, saepe aspernatur itaque sequi dolores provident! Nam, eaque eligendi animi aspernatur, asperiores vel recusandae corrupti aperiam sequi voluptatum nisi, quam dolore.
+                        {title}
                     </a>
                 </Link>
             </Typography>
             <Typography className="mt-10 mb-15">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora adipisci voluptates vel dolores odit quaerat aperiam ipsa laborum et, illum sed, necessitatibus perspiciatis blanditiis pariatur odio alias? Dolorem, porro?
+                {description}
             </Typography>
-            <Image
+            {imageUrl && <img
                 height={500}
                 width={600}
-            />
+                alt={title}
+            />}
             <PostActions />
         </Paper>
     )

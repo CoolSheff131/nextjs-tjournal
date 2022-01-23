@@ -3,7 +3,7 @@ import { TextField, Button } from '@material-ui/core'
 import React from 'react'
 import { setCookie } from 'nookies'
 import { FormProvider, useForm } from 'react-hook-form'
-import { UserApi } from '../../../utils/api'
+import { UserApi } from '../../../utils/api/user'
 import { CreateUserDto } from '../../../utils/api/types'
 import { LoginFormSchema, RegisterFormSchema } from '../../../utils/validations'
 import { FormField } from '../../FormField'
@@ -24,7 +24,7 @@ export const Register: React.FC<RegisterFormProps> = ({ onOpenLogin }) => {
     })
     const onSubmit = async (dto: CreateUserDto) => {
         try {
-            const data = await UserApi.register(dto)
+            const data = await Api().user.register(dto)
             setCookie(null, 'authToken', data.token, {
                 maxAge: 30 * 24 * 60 * 60,
                 path: '/',
