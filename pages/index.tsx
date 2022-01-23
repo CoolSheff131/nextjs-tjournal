@@ -22,14 +22,3 @@ export const Home = () => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(store => async ctx => {
-    const { authToken } = parseCookies(ctx)
-    try {
-        const userData = await UserApi.getMe(authToken)
-        store.dispatch(setUserData(userData))
-    } catch (error) {
-        console.log(error);
-
-    }
-    return { props: {} }
-})
