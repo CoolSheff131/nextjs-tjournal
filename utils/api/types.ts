@@ -16,6 +16,7 @@ export type ResponseUser = {
     email: string;
     fullName: string;
     id: number;
+    commentsCount?: number;
     token: string;
     updatedAt: string;
 }

@@ -5,6 +5,7 @@ import { Comment } from '../Comment'
 import data from '../../data'
 import { Api } from '../../utils/api'
 import { CommentItem } from '../../utils/api/types'
+import { useComments } from '../../hooks/useComments'
 
 // type IComment = {
 //     text: string;
@@ -23,17 +24,7 @@ interface PostCommentsProps {
 export const PostComments: React.FC<PostCommentsProps> = ({ postId }) => {
     const userData = useAppSelectore(selectUserData)
     const [activeTab, setActiveTab] = React.useState(0)
-    const [comments, setComments] = React.useState<CommentItem[]>([])
-    React.useEffect(() => {
-        (async () => {
-            try {
-                const comments = await Api().comments.getAll()
-                setComments(comments)
-            } catch (error) {
-                console.log(error);
-            }
-        })()
-    }, [])
+    const { comments, setComments } = useComments(postId)
 
     const onAddComment = (obj: CommentItem) => {
         setComments(prev => prev, obj)
